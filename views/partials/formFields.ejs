@@ -1,0 +1,33 @@
+<div class="mb-3">
+  <label for="coverImage" class="form-label">Cover Image</label>
+  <!-- Display the current cover image if it exists -->
+  <input type="file" class="form-control" id="coverImage" name="coverImage" >
+</div>
+
+<div class="mb-3">
+  <label for="title" class="form-label">Title</label>
+  <!-- Pre-fill with existing title if blog exists -->
+  <input type="text" class="form-control" id="title" name="title" value="<%= blog.title || '' %>" />
+</div>
+
+<div class="mb-3">
+  <label for="category" class="form-label">Category</label>
+  <!-- Pre-fill with existing category if blog exists -->
+  <input type="text" class="form-control" id="category" name="category" value="<%= blog.category || '' %>" />
+</div>
+
+<div class="mb-3">
+  <label for="description" class="form-label">Description</label>
+  <!-- Pre-fill with existing description if blog exists -->
+  <textarea name="description" class="form-control" id="description"><%= blog.description || '' %></textarea>
+</div>
+
+<div class="mb-3">
+  <label for="markdown" class="form-label">Body</label>
+  <!-- Pre-fill with existing markdown content if blog exists -->
+  <textarea name="markdown" class="form-control" id="markdown"><%= blog.markdown || '' %></textarea>
+</div>
+
+<div class="mb-3">
+  <button>Submit</button>
+</div>

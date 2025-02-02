@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>Signup</title>
+    <style>
+      /* General Styling */
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: url('/backgrounds/133460286_10262642.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+        background-repeat: no-repeat;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin-top: 100px;
+        margin-bottom: 100px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #ae7763;
+        font-weight: 200 !important;
+        font-size: 4em;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .form-label {
+        font-size: 1.2em;
+        color: #a37971;
+      }
+
+      .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        border: 2px solid #d2a197;
+        background-color: #d2a19780;
+        margin-bottom: 20px;
+        font-size: 1.1em;
+      }
+
+      .form-control:focus {
+        border-color: #d2a197;
+        box-shadow: 0 0 5px #d2a19798(216, 27, 96, 0.5) !important;
+        background-color: #fff;
+      }
+
+      .form-text {
+        font-size: 0.9em;
+        color: rgb(93, 89, 89);
+        margin-bottom: 10px;
+      }
+      .form-check-label{
+        display: inline;
+        margin-left: 8px !important;
+      }
+      button {
+        background-color: #d2a197;
+        border: none;
+        color: white;
+        font-size: 1.2em;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #d2a1979b;
+      }
+
+      /* Animation for button hover */
+      button:focus {
+        outline: none;
+        box-shadow: 0 0 5px #a5665a(216, 27, 96, 0.5);
+      }
+    </style>
+</head>
+
+<body>
+  <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+      <h1 class="display-1">SIGN UP</h1>
+      <form action="/user/signup" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullName" name="fullName" aria-describedby="fullName" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="profileImageURL" class="form-label">Profile Image</label>
+          <input type="file" class="form-control" id="profileImageURL" name="profileImageURL" />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" id="exampleInputPassword1" />
+        </div>
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              I agree to <a href="/terms">Terms and Conditions</a>
+            </label>
+          </div>
+      </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

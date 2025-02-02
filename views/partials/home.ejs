@@ -1,0 +1,301 @@
+<div class="container start text-center vh-100 vw-100 ">
+    <!-- Title and Subtitle -->
+    <p class="titulo">Scribe</p>
+    <p class="subtitulo">Fables</p>
+    <!-- Buttons for Signup and Signin -->
+    <%if(!locals.user) {%>
+        <div class="auth-buttons">
+            <a href="/user/signup"><button class="btn btn-signup">Signup</button></a>
+            <a href="/user/signin"><button class="btn btn-signin">Signin</button></a>
+        </div>
+        <%}else{%>
+            <p class="welcome">Welcome <%=locals.user.name%>!</p>
+            <%}%>
+
+                <!-- Decorative Figure -->
+                <div class="figura"></div>
+
+                <!-- Menu (with Bootstrap classes) -->
+                <div class="menu">
+                    <ul>
+                        <li><a href="" target="_blank">Mystery</a></li>
+                        <li><a href="" target="_blank">Fiction</a></li>
+                        <li><a href="" target="_blank">Non-fiction</a></li>
+                        <li><a href="" target="_blank">Fantasy</a></li>
+                        <li><a href="" target="_blank">Poetry</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">Soul on Fleek</div>
+</div>
+
+<!-- Anime.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<!-- TweenMax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+<!-- Custom Scripts -->
+<script>
+    // Wrap each letter in a span
+    var textWrapper = document.querySelector(".titulo");
+    textWrapper.innerHTML = textWrapper.textContent.replace(
+        /\S/g,
+        "<span class='letra'>$&</span>"
+    );
+
+    anime.timeline().add({
+        targets: '.titulo .letra',
+        translateY: [200, 0],
+        easing: "easeOutExpo",
+        opacity: 1,
+        duration: 1700,
+        delay: (el, i) => 400 + 70 * i
+    });
+
+    TweenMax.from(".footer", 1.5, {
+        delay: 0.7,
+        opacity: 0,
+        y: 200,
+        ease: Expo.easeInOut
+    });
+
+    TweenMax.from(".menu ul li", 1.5, {
+        delay: 1,
+        opacity: 0,
+        y: -30,
+        ease: Expo.easeInOut
+    }, 0.08);
+
+    TweenMax.from(".subtitulo", 1.5, {
+        delay: 1.5,
+        opacity: 0,
+        y: -50,
+        ease: Expo.easeInOut
+    });
+
+    TweenMax.from(".figura", 1.5, {
+        delay: 1.5,
+        opacity: 0,
+        ease: Expo.easeInOut
+    });
+    TweenMax.from(".auth-buttons", 2, {
+        delay: 2,
+        opacity: 0,
+        ease: Expo.easeInOut
+    });
+    TweenMax.from(".welcome", 2, {
+        delay: 2,
+        opacity: 0,
+        ease: Expo.easeInOut
+    });
+</script>
+
+<style>
+    :root {
+        --blanco: #fff;
+        --fondo: #533833;
+        --accent: #d2a197;
+    }
+  
+    @font-face {
+        font-family: "digital geometric";
+        src: local("Digital_geometric_bold"),
+            url("https://github.com/AdrianBL1/adrianbl1.github.io/blob/master/assets/fonts/Digital_geometric_bold.ttf") format("truetype");
+    }
+  
+    .start {
+        background-color: var(--fondo);
+        font-family: 'Courier New', Courier, monospace;
+    }
+  
+    .titulo {
+        margin-top: 2.5rem;
+        font-size: 10em;
+        color: var(--blanco);
+        overflow: hidden;
+        margin-left: 0vw;
+        font-family: "digital geometric";
+        font-weight: bold;
+    }
+  
+    .titulo .letra {
+        display: inline-block;
+        line-height: 0.5em;
+        opacity: 0;
+    }
+  
+    .subtitulo {
+        position: relative;
+        font-size: 10em;
+        color: var(--blanco);
+        overflow: hidden;
+        margin-left: 20vw;
+        margin-top: -10vh;
+        font-family: "digital geometric";
+        font-weight: bold;
+        letter-spacing: -7px;
+    }
+  
+    .auth-buttons {
+        margin-top: 3rem;
+        
+    }
+  
+    .btn {
+        margin-left: 30px !important;
+        border: 2px solid var(--accent);
+        padding: 12px 36px;
+        font-size: 1.6rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        color: var(--fondo);
+        background-color: var(--accent);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+  
+    .btn:hover {
+        background-color: var(--blanco);
+        color: var(--accent);
+        transform: scale(1.08);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+  
+    .welcome {
+        font-size: 2.5rem;
+    }
+  
+    .menu {
+        position: absolute;
+        bottom: 40%;
+        padding: 0 10px;
+        right: -160px;
+        transform: rotate(-90deg);
+    }
+  
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+  
+    .menu ul li {
+        display: inline-block;
+        padding: 10px 15px;
+        color: var(--blanco);
+        cursor: pointer;
+        letter-spacing: 2px;
+        font-size: 12px;
+        font-weight: 300;
+    }
+  
+    .menu a {
+        text-decoration: none;
+        color: var(--blanco);
+    }
+  
+    .menu a:hover {
+        color: gray;
+    }
+  
+    .footer {
+        font-size: 12px;
+        letter-spacing: 3px;
+        position: absolute;
+        color: var(--blanco);
+        bottom: 40px;
+        left: 80px;
+        transform: rotate(-90deg);
+    }
+  
+    .footer::before {
+        content: "";
+        border: 2px solid var(--blanco);
+        width: 50px;
+        margin: 0 20px 0 0;
+        transform: translateY(-2px);
+        opacity: .5;
+        display: inline-block;
+    }
+  
+    .figura {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 28px solid transparent;
+        border-right: 28px solid transparent;
+        border-bottom: 70px solid #d2a197;
+        margin-left: 160px;
+        margin-top: -265px;
+    }
+  
+    /* Media Query for small devices */
+    @media (max-width: 768px) {
+        .titulo {
+            font-size: 12vw; /* Scale down title for smaller screens */
+            margin-left: 0; /* Center align title */
+            text-align: center;
+        }
+  
+        .subtitulo {
+            font-size: 12vw; /* Scale down subtitle */
+            margin-left: 0; /* Center align subtitle */
+            margin-top: 0vh;
+            text-align: center;
+            letter-spacing: normal;
+            margin-bottom:0rem;
+        }
+  
+        .auth-buttons {
+            text-align: center; /* Center buttons */
+        }
+        .welcome{
+            font-size: 4vw;
+        }
+        .menu {
+            position: static;
+            transform: none;
+            margin-top: 2rem;
+            text-align: center;
+        }
+  
+        .menu ul li {
+            display: block; /* Stack menu items vertically */
+            margin: 10px 0;
+        }
+  
+        .footer {
+            transform: none;
+            position: static;
+            margin-top: 2rem;
+            text-align: center;
+        }
+  
+        .figura {
+            display: none; /* Hide the decorative figure on small screens */
+        }
+        .btn {
+        border: 2px solid var(--accent);
+        padding: 6px 18px;
+        font-size: 0.8rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        color: var(--fondo);
+        background-color: var(--accent);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        justify-content: center;
+    }
+    }
+  </style>
+  

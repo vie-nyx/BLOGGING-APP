@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>Homepage</title>
+        <style>
+            .vh-60{
+                height:60vh;
+            }
+            body {
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding: 0;
+                background:url('/backgrounds/neutral-abstract-texture-simple-background.jpg');
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center center;
+                background-repeat: no-repeat;
+                color: #fff;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            .blog-grid{
+                background-image:"public/backgrounds/blog_background.webp";
+            }
+            /* Masonry Grid Styling */
+            .grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .grid-item {
+                flex: 1 1 calc(33.333% - 20px);
+                /* Ensure grid items take up space evenly */
+                margin-bottom: 16px;
+            }
+
+            .card {
+                background-color: rgba(255, 255, 255, 0.8);
+                /* Slight transparency for the card */
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-img-top {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+
+            .card-body {
+                padding: 16px;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .card-text {
+                font-size: 1.1rem;
+                color: #555;
+            }
+
+            button {
+                background-color: #d2a197;
+                /* Soft, warm color */
+                border: none;
+                color: white;
+                font-size: 1.2em !important;
+                padding: 12px 21px !important;
+                margin-top:4px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                /* Smooth transition for all properties */
+                text-decoration: none;
+                /* Remove underline from anchor inside button */
+                display: inline-block;
+                text-align: center;
+            }
+
+            button:hover {
+                background-color: #a76b54;
+                /* Darker shade on hover */
+                transform: translateY(-4px);
+                /* Slight lift effect */
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+                /* Shadow effect for depth */
+            }
+
+            button:focus {
+                outline: none;
+                box-shadow: 0 0 8px rgba(216, 161, 151, 0.8);
+                /* Focus outline with color matching */
+            }
+
+            button a {
+                color: white;
+                text-decoration: none;
+                /* Ensure the text inside the button is not underlined */
+                display: block;
+                height: 100%;
+            }
+
+            button:hover a {
+                color: white;
+                /* Maintain white color when hovered */
+            }
+
+            /* Footer Styling */
+            footer {
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 20px;
+                text-align: center;
+                color: #fff;
+                font-size: 1rem;
+                margin-top: 40px;
+            }
+
+            footer p {
+                margin: 0;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .grid-item {
+                    flex: 1 1 calc(50% - 20px);
+                    /* 
+                    Two items per row on small screens */
+                }
+                button {
+                background-color: #d2a197;
+                font-size: 0.8em !important;
+                padding: 6px 10px !important;
+                margin-top:4px;
+                border-radius: 8px;
+            }
+            }
+
+            @media (max-width: 480px) {
+                .grid-item {
+                    flex: 1 100%;
+                    /* One item per row on very small screens */
+                }
+            }
+        </style>
+</head>
+
+<body>
+
+    <%- include('./partials/nav') %>
+            <% if(locals.user) {%>
+                <div class="container blog-grid">
+                    <!-- Masonry Grid Container -->
+                    <div class="grid">
+                        <% if (blogs.length> 0) { %>
+                            <% blogs.forEach(blog=> { %>
+                                <div class="grid-item col-6 col-md-4 col-lg-3"> <!-- Responsive grid items -->
+                                    <div class="card h-100 me-4">
+                                        <img src="<%= blog.coverImageURL || '/images/default-cover.jpg' %>"
+                                            class="card-img-top" alt="<%= blog.title %> cover image" loading="lazy">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= blog.title %>
+                                            </h5>
+                                            <p class="card-text">
+                                                <%= blog.description %>
+                                            </p>
+                                            <button><a href="/blog/<%= blog._id %>" class="d-inline">View</a></button>
+                                            <button><a href="/blog/edit/<%= blog._id %>" class="d-inline">Edit</a></button>
+                                            <form action="/blog/<%= blog._id%>?_method=DELETE" method="POST" class="d-inline">
+                                                <button type="submit" class="d-inline" style="background-color: rgb(222, 14, 14);">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                                    <% } else { %>
+                                        <p class="text-center">No blogs available at the moment. Check back later!</p>
+                                        <% } %>
+                    </div>
+                </div>
+                <%}%>
+
+            <%- include('./partials/footer') %>
+                <%- include('./partials/scripts') %>
+
+                    <!-- Masonry and imagesLoaded libraries -->
+                    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+                    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            // Ensure Masonry initializes after images are loaded
+                            var grid = document.querySelector('.grid');
+                            imagesLoaded(grid, function () {
+                                new Masonry(grid, {
+                                    itemSelector: '.grid-item', // Each blog card
+                                    columnWidth: '.grid-item',  // Width of each column
+                                    percentPosition: true,     // Enable percentage-based layout
+                                });
+                            });
+                        });
+                    </script>
+</body>
+
+</html>
